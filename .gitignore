@@ -1,0 +1,17 @@
+# python
+__pycache__/
+*.pyc
+
+# training artifacts (future-proof)
+checkpoints/
+runs/
+wandb/
+logs/
+
+# env
+.venv/
+venv/
+data/
+experiments/
+configs/
+*.qsub
