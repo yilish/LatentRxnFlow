@@ -1,19 +1,22 @@
-name: latentrxnflow
+name: latentrxnflow-py37
 channels:
   - pytorch
+  - rdkit
   - conda-forge
 dependencies:
-  - python=3.10
-  - pytorch
-  - numpy
-  - pyyaml
-  - tqdm
-  - rdkit
-  - scikit-learn
-  - matplotlib
-  - pillow
+  # Python 3.7 stack used for the epoch 490 reproduction.
+  - python=3.7
+  - pytorch=1.12.1
+  - cudatoolkit=11.3.1
+  - numpy=1.21.6
+  - pyyaml=5.4.1
+  - tqdm=4.64.1
+  - rdkit=2020.09.1.0
+  - scikit-learn=1.0.2
+  - matplotlib=3.4.3
+  - pillow=9.5.0
   - pip
   - pip:
-      - wandb
-      - transformers
-      - torchdiffeq
+      - wandb==0.16.4
+      - transformers==4.30.2
+      - torchdiffeq==0.2.5

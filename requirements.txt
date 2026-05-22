@@ -1,11 +1,14 @@
-torch>=1.13
-numpy
-PyYAML
-wandb
-tqdm
-rdkit
-transformers
-scikit-learn
-matplotlib
-Pillow
-torchdiffeq
+# Python 3.7-compatible package set used for reproduction.
+# For CUDA 11.3 PyTorch wheels, install torch with:
+# pip install torch==1.12.1+cu113 -f https://download.pytorch.org/whl/torch_stable.html
+torch==1.12.1
+numpy==1.21.6
+PyYAML==5.4.1
+wandb==0.16.4
+tqdm==4.64.1
+rdkit-pypi==2022.9.5
+transformers==4.30.2
+scikit-learn==1.0.2
+matplotlib==3.4.3
+Pillow==9.5.0
+torchdiffeq==0.2.5

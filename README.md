@@ -13,7 +13,7 @@ Create an environment with either conda:
 
 ```bash
 conda env create -f environment.yml
-conda activate latentrxnflow
+conda activate latentrxnflow-py37
 ```
 
 or pip:
