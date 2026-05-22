@@ -9,14 +9,15 @@ files needed to run it.
 
 ## Setup
 
-Create an environment with either conda:
+The reproduction stack is Python 3.7. Create it with conda:
 
 ```bash
 conda env create -f environment.yml
 conda activate latentrxnflow-py37
 ```
 
-or pip:
+`requirements.txt` is provided for pip-based environments, but conda is
+recommended because RDKit is more reliable there:
 
 ```bash
 python -m venv .venv
@@ -78,16 +79,43 @@ torchrun --nproc_per_node=4 eval_multigpu.py --config configs/eval.yaml --ddp
 
 The NERF epoch 490 checkpoint uses the legacy conditional flow head and
 fingerprint condition path. To reproduce that checkpoint, use the provided
-configs:
+configs after placing the checkpoint and pickles locally.
+
+Expected local inputs:
+
+- `checkpoints/flow_nerf_baseline_epoch_490.pt`
+- `data/valid_data_rr_only_condition.pickle`
+- `data/test_data_rr_only_condition.pickle`
+
+Run the full test evaluation:
 
 ```bash
-python eval_multigpu.py --config configs/reproduce_epoch490_test_9017.yaml
-python eval_multigpu.py --config configs/reproduce_epoch490_valid.yaml
+WANDB_MODE=disabled python eval_multigpu.py --config configs/reproduce_epoch490_test_9017.yaml
 ```
 
-The important model settings are `flow_cond_head: film_residual_add`,
-`condition_source: fp`, `cond_pool: None`, `eval.nfe: 20`, and
-`eval.ode_method: heun`.
+This reproduces the legacy NERF result on
+`test_data_rr_only_condition.pickle`:
+
+```text
+ode_delta acc = 0.9016955086525957
+```
+
+Run validation with:
+
+```bash
+WANDB_MODE=disabled python eval_multigpu.py --config configs/reproduce_epoch490_valid.yaml
+```
+
+The important compatibility settings are:
+
+- `flow_cond_head: film_residual_add`
+- `condition_source: fp`
+- `cond_pool: None`
+- `eval.nfe: 20`
+- `eval.ode_method: heun`
+
+The newer bounded `film_residual` head and condition-embedding path do not
+match this checkpoint.
 
 ## What Is Not Included
 

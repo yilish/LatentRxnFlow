@@ -1,6 +1,6 @@
 eval:
-  checkpoint_path: /home/yshen7/dev/NERF_on_generalizability/NERF/checkpoints/flow_nerf_baseline_epoch_490.pt
-  pickle_path: /home/yshen7/dev/NERF_on_generalizability/NERF/data/test_data_rr_only_condition.pickle
+  checkpoint_path: checkpoints/flow_nerf_baseline_epoch_490.pt
+  pickle_path: data/test_data_rr_only_condition.pickle
   batch_size: 128
   temperature: 0.7
   max_batches: null
