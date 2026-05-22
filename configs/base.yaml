@@ -1,0 +1,71 @@
+train:
+  batch_size: 64
+  num_epochs: 500
+  learning_rate: 3.0e-4
+  seed: 42
+  device: cuda
+  save_checkpoint: true
+  save_dir: checkpoints
+  save_last_ckpt: false
+
+  # Optional warm start. `backbone_ckpt` takes precedence over `encoder_ckpt`.
+  use_pretrained_encoder: false
+  encoder_ckpt: checkpoints/M_encoder_baseline.pt
+  backbone_ckpt: null
+  freeze_encoder: true
+
+model:
+  latent_dim: 256
+  time_embed_dim: 64
+  cond_dim: 640
+  ntoken: 128
+  flow_weight: 0.001
+  fm_sigma: 0.05
+  detach_encoder_for_flow: false
+  use_conditional_flow: true
+  flow_cond_head: controlnet
+  film_hidden_dim: 512
+  film_init_zero: true
+  film_s_gamma: 1.0
+  film_s_beta: 0.2
+  cond_pool: gated
+  cond_drop_prob: 0.2
+  force_zero_cond: false
+  num_examples: 8
+  flow_sampling_cfg:
+    t_sampling: beta
+    beta_a: 0.5
+    beta_b: 0.5
+  decoder:
+    delta_source: ode
+    input_mode: fuse
+    nfe: 5
+    ode_method: heun
+
+eval:
+  enabled: true
+  temperature: 0.7
+  max_batches: null
+  num_examples: 8
+  batch_size: 128
+  eval_interval: 5
+  decoder_eval_modes:
+    - {name: ode_delta, delta_source: ode, input_mode: fuse}
+
+data:
+  # Preferred: give separate train/eval pickle files.
+  train_pickle_path: null
+  eval_pickle_path: null
+
+  # Fallback: split this single pickle by train_ratio/eval_ratio.
+  pickle_path: data/reactions.pkl
+  split_seed: 42
+  train_ratio: 0.9
+  eval_ratio: 0.1
+  overfit_subset_size: 128
+  num_workers: 4
+
+experiment:
+  project: latentrxnflow
+  name: latentrxnflow
+  output_dir: experiments

@@ -1,0 +1,11 @@
+torch>=1.13
+numpy
+PyYAML
+wandb
+tqdm
+rdkit
+transformers
+scikit-learn
+matplotlib
+Pillow
+torchdiffeq

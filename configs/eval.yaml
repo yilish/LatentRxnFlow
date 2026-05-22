@@ -1,0 +1,50 @@
+eval:
+  checkpoint_path: checkpoints/flow_nerf_baseline_last.pt
+  pickle_path: data/eval_reactions.pkl
+  batch_size: 128
+  temperature: 0.7
+  max_batches: null
+  num_examples: 8
+  nfe: 20
+  ode_method: heun
+  atol: 0.0001
+  rtol: 0.0001
+  use_wandb: false
+  decoder_eval_modes:
+    - {name: ode_delta, delta_source: ode, input_mode: fuse}
+
+model:
+  latent_dim: 256
+  time_embed_dim: 64
+  cond_dim: 640
+  ntoken: 128
+  flow_weight: 0.0
+  fm_sigma: 0.0
+  detach_encoder_for_flow: true
+  use_conditional_flow: false
+  flow_cond_head: controlnet
+  film_hidden_dim: 512
+  film_init_zero: true
+  film_s_gamma: 1.0
+  film_s_beta: 0.2
+  cond_pool: gated
+  cond_drop_prob: 0.0
+  force_zero_cond: false
+  num_examples: 8
+  flow_sampling_cfg:
+    t_sampling: beta
+    beta_a: 0.5
+    beta_b: 0.5
+  decoder:
+    delta_source: ode
+    input_mode: fuse
+    nfe: 20
+    ode_method: heun
+
+data:
+  num_workers: 4
+
+experiment:
+  project: latentrxnflow-eval
+  name: eval-run
+  output_dir: experiments

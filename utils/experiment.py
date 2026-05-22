@@ -109,23 +109,21 @@ def load_config(path: Path) -> Dict[str, Any]:
         return yaml.safe_load(f)
 def snapshot_code(exp_dir: Path, root_dir: Path) -> None:
     """
-    把 train_flow_nerf.py 和 models/* 拷贝到 EXP_DIR/code 下
+    Copy the current training entry point and model helpers into EXP_DIR/code.
     """
     code_dir = exp_dir / "code"
     code_dir.mkdir(exist_ok=True)
 
-    # 1) 复制 train_flow_nerf.py
-    src_train = root_dir / "train_flow_nerf.py"
-    if src_train.is_file():
-        shutil.copy2(src_train, code_dir / "train_flow_nerf.py")
+    for train_name in ("train_latentrxnflow.py", "train_flow_nerf.py"):
+        src_train = root_dir / train_name
+        if src_train.is_file():
+            shutil.copy2(src_train, code_dir / train_name)
 
-    # 2) 复制 models 目录
     src_models = root_dir / "models"
     dst_models = code_dir / "models"
     if src_models.is_dir():
         copytree_safe(src_models, dst_models)
 
-    # 3) 你想的话也可以顺便把 utils 备份
     src_utils = root_dir / "utils"
     dst_utils = code_dir / "utils"
     if src_utils.is_dir():

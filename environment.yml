@@ -1,0 +1,19 @@
+name: latentrxnflow
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pytorch
+  - numpy
+  - pyyaml
+  - tqdm
+  - rdkit
+  - scikit-learn
+  - matplotlib
+  - pillow
+  - pip
+  - pip:
+      - wandb
+      - transformers
+      - torchdiffeq

@@ -474,7 +474,7 @@ def main() -> None:
     parser.add_argument(
         "--config",
         type=Path,
-        default=Path("flow_nerf_mvp/configs/base.yaml"),
+        default=Path("configs/base.yaml"),
         help="配置文件路径",
     )
     parser.add_argument("--ddp", action="store_true", help="use DDP (torchrun)")

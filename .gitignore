@@ -7,11 +7,20 @@ checkpoints/
 runs/
 wandb/
 logs/
+experiments/
+*.qsub
 
 # env
 .venv/
 venv/
-data/
-experiments/
-configs/
-*.qsub
+
+# local datasets and generated preprocessing artifacts
+data/*
+!data/
+!data/*.py
+!data/README.md
+!data/__init__.py
+*.pickle
+*.pkl
+*.pt
+*.ckpt
